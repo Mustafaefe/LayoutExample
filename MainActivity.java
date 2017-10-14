@@ -3,12 +3,16 @@ package efe.com.layoutexample;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,10 +58,36 @@ public class MainActivity extends AppCompatActivity {
         sv.addView(lLayout);
     }
 
+    private void makeToast(String title, String message){
+
+        Toast toast = new Toast(this);
+
+        LayoutInflater li = MainActivity.this.getLayoutInflater();
+        View v = li.inflate(R.layout.custom_toast, null);
+
+        FrameLayout pnlOuter = (FrameLayout) v.findViewById(R.id.pnlOuter);
+        LinearLayout pnlInner = (LinearLayout) pnlOuter.findViewById(R.id.pnlInner);
+
+        TextView txtTitle = (TextView) pnlInner.findViewById(R.id.txtTitle);
+        txtTitle.setText(title);
+
+        TextView txtMessage = (TextView) pnlInner.findViewById(R.id.txtMessage);
+        txtMessage.setText(message);
+
+        toast.setView(pnlOuter);
+        toast.setDuration(Toast.LENGTH_LONG);
+        //toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        setContentView(sv);
+        setContentView(R.layout.activity_main);
+    }
+
+    public void showToast(View Button){
+        makeToast("EFE TİCARET", "MERHABALAR");
     }
 }
