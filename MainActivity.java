@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         sv.addView(lLayout);
     }
 
-    private void makeToast(String title, String message){
+    public void makeToast(String title, String message){
 
         Toast toast = new Toast(this);
 
