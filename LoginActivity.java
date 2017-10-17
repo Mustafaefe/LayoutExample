@@ -1,15 +1,16 @@
 package efe.com.layoutexample;
 
 import android.app.Activity;
-import android.graphics.Color;
+import android.app.IntentService;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+import android.content.Intent;
+
+
 
 /**
  * Created by Mustafa on 14.10.2017.
@@ -19,16 +20,11 @@ public class LoginActivity extends Activity {
 
     private EditText txtUsername;
     private EditText txtPass;
-    String username;
-    String password;
     LinearLayout pnl;
 
     private void init(){
         txtUsername = (EditText) this.findViewById(R.id.txtUserName);
         txtPass = (EditText) this.findViewById(R.id.txtPassword);
-
-        username = txtUsername.getText().toString();
-        password = txtPass.getText().toString();
 
         pnl = (LinearLayout) this.findViewById(R.id.pnl);
     }
@@ -42,8 +38,22 @@ public class LoginActivity extends Activity {
     }
 
     public void CompareEntryInfo(View view){
+
+        String username = txtUsername.getText().toString();
+        String password = txtPass.getText().toString();
+        Intent intent = new Intent(this, TargetActivity.class);;
+
         if(username.equals("mustafa") && password.equals("efe123")){
-            Toast.makeText(this, "Giriş Başarılı", Toast.LENGTH_LONG).show();
+            intent.putExtra("username",username);
+            this.startActivity(intent);
+        }
+        if(username.equals("ali") && password.equals("efe123")){
+            intent.putExtra("username",username);
+            this.startActivity(intent);
+        }
+        if(username.equals("efe") && password.equals("efe123")){
+            intent.putExtra("username",username);
+            this.startActivity(intent);
         }
         else
             Toast.makeText(this, "Giriş Başarısız", Toast.LENGTH_LONG).show();
